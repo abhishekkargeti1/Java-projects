@@ -16,8 +16,9 @@ class Project1{
         }else{
             System.out.println("You gussed number is too Big");
             continue;
-        }
+            }
         }
         sc.close();
     }
+    
 }
