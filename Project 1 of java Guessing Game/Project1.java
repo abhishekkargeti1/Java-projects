@@ -8,7 +8,7 @@ class Project1{
         System.out.println("Enter your Gussed Number");
         int guessnumber = sc.nextInt();
         if(Computergenratednumber == guessnumber){
-            System.out.println("You guessed write.\n You number is :"+guessnumber);
+            System.out.println("You guessed right.\n You number is :"+guessnumber);
             break;
         }else if (Computergenratednumber > guessnumber){
             System.out.println("You gussed number is too Small");
