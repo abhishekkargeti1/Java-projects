@@ -5,7 +5,7 @@ class Project1{
         int Computergenratednumber = r1.nextInt(100);
         Scanner sc = new Scanner(System.in);
         for(;;){ 
-        System.out.println("Enter your Gussed Number");
+        System.out.println("Guess Number Between 1 to 100 ");
         int guessnumber = sc.nextInt();
         if(Computergenratednumber == guessnumber){
             System.out.println("You guessed right.\n You number is :"+guessnumber);
