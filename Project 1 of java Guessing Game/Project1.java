@@ -18,6 +18,6 @@ class Project1{
             continue;
         }
         }
+        sc.close();
     }
-
 }
