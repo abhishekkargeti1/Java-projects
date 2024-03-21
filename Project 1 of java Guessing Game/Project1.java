@@ -26,22 +26,22 @@ class Project1{
                         continue;
                     }
                 }  
-             }catch(InputMismatchException i){
+            }catch(InputMismatchException i){
                 System.out.println("Please Enter a valid input ");
                 System.out.println("Do you want to play again");
                 System.out.println("If yes press Y");
+                sc.nextLine();
                 s2 = sc.next().charAt(0);
-                System.out.println(s2);
                 if(s2 =='Y'||s2 == 'y'){
-                continue;
+                System.out.println("Guess Number Between 0 to 100 ");
+                    continue;
                 }else{
                     System.out.println("Thank you for Playing");
                     break;
                 } 
              }
-              
         }
-    }
+    }   
 }
    
 
