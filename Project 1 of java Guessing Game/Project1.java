@@ -2,6 +2,7 @@ import java.util.*;
 class Project1{
     public static void main(String []args){
         char  s1=0,s2=0 ; 
+        int guesscounter=0;
         Random r1= new Random();
         int Computergenratednumber = r1.nextInt(100);
         Scanner sc = new Scanner(System.in);
@@ -11,10 +12,12 @@ class Project1{
         for(;;){ 
             try{
                 int guessnumber = sc.nextInt();
+                guesscounter++;
                 System.out.println(guessnumber);
                 if(s1 == 'Y'||s1 == 'y'){       
                     if(Computergenratednumber == guessnumber){
                         System.out.println("You guessed right.\n You number is : "+guessnumber);
+                        System.out.println("You Guessed the number in  "+guesscounter+"times");
                         break;
                     }else if (Computergenratednumber > guessnumber){
                         System.out.println("You gussed number is too Small");
