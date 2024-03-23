@@ -17,7 +17,7 @@ class Project1{
                 if(s1 == 'Y'||s1 == 'y'){       
                     if(Computergenratednumber == guessnumber){
                         System.out.println("You guessed right.\n You number is : "+guessnumber);
-                        System.out.println("You Guessed the number in  "+guesscounter+"times");
+                        System.out.println("You Guessed the number in  "+guesscounter+" times");
                         break;
                     }else if (Computergenratednumber > guessnumber){
                         System.out.println("You gussed number is too Small");
