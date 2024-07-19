@@ -18,8 +18,8 @@ public class PostDao {
         ArrayList<Categories> list = new ArrayList<>();
         try {
             String query = "select * from Categories";
-            PreparedStatement ptsmt = con.prepareStatement(query);
-            ResultSet set = ptsmt.executeQuery();
+            PreparedStatement pstmt = con.prepareStatement(query);
+            ResultSet set = pstmt.executeQuery();
             while (set.next()) {
                 int cid = set.getInt("Cid");
                 String Name = set.getString("Name");
@@ -62,7 +62,7 @@ public class PostDao {
 
                 int Pid = set.getInt("Pid");
                 String Title = set.getString("Title");
-                System.out.println(Title);
+//                System.out.println(Title);
                 String Content = set.getString("Content");
                 String Code = set.getString("Code");
                 String Picture = set.getString("Picture");

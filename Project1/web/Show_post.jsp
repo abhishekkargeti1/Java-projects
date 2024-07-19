@@ -1,3 +1,4 @@
+<%@page import="com.project1.dao.LikeandDislikeDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="com.project1.dao.UserDao"%>
@@ -184,7 +185,11 @@
                             </div>
                         </div>
                         <div class="card-footer bg-dark ">
-                            <a href="#" class="btn btn-outline-primary btn-small"><i class="fa fa-thumbs-o-up"></i><span> 10</span></a>
+                            <%
+                                LikeandDislikeDao ld= new LikeandDislikeDao(ConnectionProvider.getConnection());
+                                
+                            %>
+                            <a href="#" onclick="doLike(<%= post.getPid()%>,<%= user.getId()%>)" class="btn btn-outline-primary btn-small"><i class="fa fa-thumbs-o-up "></i> <span class="like-counter" ><%=ld.countLikeOnPost(post.getPid())%></span></a>
                             <a href="#" class="btn  btn-outline-success  btn-small"><i class="fa fa-commenting-o"></i><span> 20</span></a>
                             <a href="Profile_page.jsp" class="btn btn-outline-info btn-small">Back</a>
                         </div>
@@ -443,7 +448,7 @@
                     url: "Load_posts.jsp",
                     data: {cid: catId},
                     success: function (data, textStatus, jqXHR) {
-                        console.log(data);
+//                        console.log(data);
                         $("#loader").hide();
                         $("#post_container").show();
                         $("#post_container").html(data);
@@ -455,7 +460,7 @@
 
 
             $(document).ready(function () {
-                console.log("Loaded3");
+//                console.log("Loaded3");
                 let temp = $(".c-link")[0];
                 getPosts(0, temp);
 

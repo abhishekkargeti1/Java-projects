@@ -15,6 +15,8 @@
             <file>file:/D:/My%20Personal%20Work/projects%20of%20java/Project1/web/Show_post.jsp</file>
             <file>file:/D:/My%20Personal%20Work/projects%20of%20java/Project1/src/java/com/project1/entities/Categories.java</file>
             <file>file:/D:/My%20Personal%20Work/projects%20of%20java/Project1/web/Load_posts.jsp</file>
+            <file>file:/D:/My%20Personal%20Work/projects%20of%20java/Project1/web/javascript/script.js</file>
+            <file>file:/D:/My%20Personal%20Work/projects%20of%20java/Project1/src/java/com/project1/servlets/LikeandDislike.java</file>
             <file>file:/D:/My%20Personal%20Work/projects%20of%20java/Project1/web/WEB-INF/web.xml</file>
             <file>file:/D:/My%20Personal%20Work/projects%20of%20java/Project1/web/Error_Page404.jsp</file>
             <file>file:/D:/My%20Personal%20Work/projects%20of%20java/Project1/src/java/com/project1/entities/Validation.java</file>
@@ -24,6 +26,7 @@
             <file>file:/D:/My%20Personal%20Work/projects%20of%20java/Project1/src/java/com/project1/servlets/EditServlet.java</file>
             <file>file:/D:/My%20Personal%20Work/projects%20of%20java/Project1/web/Profile_page.jsp</file>
             <file>file:/D:/My%20Personal%20Work/projects%20of%20java/Project1/src/java/com/project1/servlets/AutoLogout.java</file>
+            <file>file:/D:/My%20Personal%20Work/projects%20of%20java/Project1/src/java/com/project1/dao/LikeandDislikeDao.java</file>
             <file>file:/D:/My%20Personal%20Work/projects%20of%20java/Project1/src/java/com/project1/helper/ConnectionProvider.java</file>
             <file>file:/D:/My%20Personal%20Work/projects%20of%20java/Project1/web/navbar.jsp</file>
             <file>file:/D:/My%20Personal%20Work/projects%20of%20java/Project1/web/Error_Page.jsp</file>

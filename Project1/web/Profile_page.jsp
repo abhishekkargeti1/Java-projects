@@ -127,7 +127,8 @@
                             All Posts
                         </a>
                         <!--Categories fetching from DB-->
-                        <%                            PostDao postdao = new PostDao(ConnectionProvider.getConnection());
+                        <%                            
+                           PostDao postdao = new PostDao(ConnectionProvider.getConnection());
                             ArrayList<Categories> list1 = postdao.getCategories();
                             for (Categories category : list1) {
 
@@ -330,7 +331,7 @@
         <script>
                             $(document).ready(function () {
                                 let editStatus = false;
-                                console.log("Loaded1");
+//                                console.log("Loaded1");
                                 $("#Profile_Edit_button").click(function () {
                                     if (editStatus === false) {
                                         $("#Profile_Detail").hide();
@@ -358,7 +359,7 @@
 
         <script>
             $(document).ready(function () {
-                console.log("Loaded2");
+//                console.log("Loaded2");
                 $("#Add_Post_Form").on("submit", function (event) {
                     // this code call when the submit button is clicked
                     event.preventDefault();
@@ -413,7 +414,7 @@
 
 
             $(document).ready(function () {
-                console.log("Loaded3");
+//                console.log("Loaded3");
                 let temp = $(".c-link")[0];
                 getPosts(0, temp);
 
@@ -423,7 +424,7 @@
         <script>
 
             var lastActiveTimeMs = new Date().getTime(); // Set to current time on page load
-            var SESSION_TIMEOUT_MILLIS = 10 * 60 * 1000; // 35 mins in milliseconds
+            var SESSION_TIMEOUT_MILLIS = 10 * 60 * 1000; //10 mins in milliseconds
             var CHECK_TIME_MILLIS = 1000; // 1 second in milliseconds
             var timerInterval;
 
@@ -438,6 +439,7 @@
                         method: 'POST',
                         success: function (response) {
                             // Redirect to login page after session is invalidated
+//                            console.log(response);
                             swal("Login Session Over")
                                         .then((value) => {
                                             window.location.href = 'Login_page.jsp';

@@ -43,8 +43,8 @@ public class UserDao {
         User user = null;
         try {
 
-            System.out.println("==>" + email + "<==");
-            System.out.println("==>" + password + "<==");
+//            System.out.println("==>" + email + "<==");
+//            System.out.println("==>" + password + "<==");
             String query = "select * from user_details where email=? and password=? ";
             PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, email);
