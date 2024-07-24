@@ -23,7 +23,7 @@
             <h3 class="display-3 mt-3">Sorry ! Something Went Wrong.....</h3>
             <h3 class="display-3 mt-3">Contact to IT Department </h3>
             <br>
-            <a href ="Home.jsp"class="btn primary-background  btn-lg text-white mt-2">Home</a>
+            <a href ="Home.jsp"class="btn btn-primary  btn-lg text-white mt-2">Home</a>
         </div>
         
         

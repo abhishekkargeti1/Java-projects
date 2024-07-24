@@ -177,7 +177,7 @@
                                     SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
                                     String currentTime = sdf.format(post.getDate());
                                 %>
-                                <p class="post_Date"><%= formattedDate%> Time <%= currentTime%></p>
+                                <p class="post_Date"><%= formattedDate%> <%= currentTime%></p>
                             </div>
                         </div>
                         <span class="post_content"><%=post.getContent()%></span>
