@@ -1,6 +1,6 @@
 <%@page import="com.project1.entities.Message"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="navbar.jsp"%>
+
 <%@ page errorPage="Error_Page.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -24,6 +24,7 @@
         </style>
     </head>
     <body>
+        <%@include file="navbar.jsp"%>
         <main class=" p-3">
             <div class="container">
                 <div class="col-md-6 offset-md-3">

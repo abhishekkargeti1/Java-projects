@@ -1,6 +1,6 @@
 <%@page import="com.project1.entities.Message"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="navbar.jsp" %>
+
 <%@ page errorPage="Error_Page.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -38,6 +38,7 @@
         </style>
     </head>
     <body>
+        <%@include file="navbar.jsp" %>
         <main class="d-flex align-items-center " style="height: 90vh">
             <div class="container pb-3">
                 <div class="row">
@@ -63,8 +64,8 @@
                             <div class="card-body">
                                 <form action="Login_Servlet" method="POST" id="form">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Email address</label>
-                                        <input name="User_email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+                                        <label for="exampleInputEmail1">Email Address</label>
+                                        <input name="User_email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" required>
                                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                     </div>
                                     <div class="form-group">

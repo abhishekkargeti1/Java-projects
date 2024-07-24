@@ -53,7 +53,7 @@
     <body>
         <!--navBar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-            <a class="navbar-brand" href="Home.jsp"><span class="fa fa-asterisk"></span> Tech Website </a>
+            <a class="navbar-brand" href="Home.jsp"><span class="fa fa-asterisk"></span> NextGen Posts </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -63,9 +63,9 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="Home.jsp">Home <span class="sr-only"></span></a>
                     </li>
-                    <li class="nav-item active">
+<!--                    <li class="nav-item active">
                         <a class="nav-link" href="#">About Us<span class="sr-only"></span></a>
-                    </li>
+                    </li>-->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="fa fa-check-square-o"></span>  Categories
@@ -82,9 +82,9 @@
                             %>
                         </div>
                     </li>
-                    <li class="nav-item active">
+<!--                     <li class="nav-item active">
                         <a class="nav-link" href="#"><span class="fa fa-address-card"></span> Contact Us<span class="sr-only"></span></a>
-                    </li>
+                    </li>-->
                     <li class="nav-item active">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#Add_Post_Modal"><span class="fa fa-bullhorn"></span> Post<span class="sr-only"></span></a>
                     </li>

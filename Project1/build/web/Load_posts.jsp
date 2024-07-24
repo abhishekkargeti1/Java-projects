@@ -24,8 +24,8 @@
 </style>
 <div class="row">
     <%
-        // Thread.sleep(2000);
-        User user = (User) session.getAttribute("CurrentUser");
+         Thread.sleep(2000);
+        
         PostDao postdao = new PostDao(ConnectionProvider.getConnection());
         List<Post> posts = null;
         int cid = Integer.parseInt(request.getParameter("cid"));
@@ -55,8 +55,8 @@
 
                 %>
                 <button class="btn btn-outline-primary btn-small"><i class="fa fa-thumbs-o-up "></i> Likes <%=ld.countLikeOnPost(post.getPid())%></span></button>
-                <a href="#" class="btn btn-outline-success btn-small "><i class="fa fa-commenting-o"></i><span> Comments 20</span></a>
-                <a href="Show_post.jsp?post_id=<%= post.getPid()%>" class="btn btn-outline-info btn-small mt-1">Read More</a>
+                <!--<a href="#" class="btn btn-outline-success btn-small "><i class="fa fa-commenting-o"></i><span> Comments 20</span></a>-->
+                <a href="Show_post.jsp?post_id=<%= post.getPid()%>" class="btn btn-outline-info btn-small ">Read More</a>
             </div>
         </div>
     </div>

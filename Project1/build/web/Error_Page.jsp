@@ -21,7 +21,7 @@
         <div class="container text-center">
             <img src="images/browser.png" alt="" class="img-fluid"/>
             <h3 class="display-3 mt-3">Sorry ! Something Went Wrong.....</h3>
-            <h4 class="mt-3"><%=exception%></h4>
+            <!--<h4 class="mt-3"><%=exception%></h4>-->
             <br>
             <a href ="Home.jsp"class="btn primary-background  btn-lg text-white mt-2">Home</a>
         </div>
