@@ -1,0 +1,23 @@
+package com.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.dao.DaoLayerImpl;
+import com.entities.UserDetails;
+
+public class ServiceLayerImpl implements Servicelayer {
+	
+	@Autowired
+	private DaoLayerImpl dao;
+	
+	
+	@Override
+	public boolean insertData(UserDetails details) {
+		// System.out.println("Details Of Service "+details);
+		if(dao.insertData(details)) {
+			return true;
+		}
+		return false;
+	}
+
+}
