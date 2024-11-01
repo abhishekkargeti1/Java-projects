@@ -1,9 +1,6 @@
 package com.helperclasses;
 
-import java.io.File;
 import java.io.FileOutputStream;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartFile;
 
