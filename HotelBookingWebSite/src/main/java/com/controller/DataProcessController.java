@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.entities.UserDetails;
 import com.helperclasses.FileUpload;
+import com.helperclasses.MailerService;
 import com.helperclasses.Message;
+import com.helperclasses.Validation;
 import com.services.ServiceLayerImpl;
 
 @Controller
@@ -53,22 +56,47 @@ public class DataProcessController {
 		userDetails.setUserDOB(dateString);
 
 		// System.out.println("Details " + userDetails);
-		if (service.insertData(userDetails)) {
+		if(Validation.emailValidation(userEmail)== true) {
+			System.out.println("In Side If ");
+			return "Email Already Exist  Please Go to Login Page ";
+		}else if (service.insertData(userDetails)) {
 			try {
 				Thread.sleep(7000);
 				String path = session.getServletContext().getRealPath("/") + "WEB-INF" + File.separator + "resources"
 						+ File.separator + "images" + File.separator + file.getOriginalFilename();
 				FileUpload upload = new FileUpload(file);
-				upload.saveFile(path);
-				return "Done";
+				if(upload.saveFile(path)) {
+					
+					MailerService.mailSender("Congulation Your login Id is "+userEmail+" And Password is d4ng3r", "Your Login Id and Password", userEmail, "abhishek.kargeti@gmail.com");
+					return "Done";
+				}
+				return "Image is not Uploaded Successfully";
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "Error Saving File in Db";
 			}
-
+			
 		} else {
 			return "Database insert Failed";
 		}
 	}
+	
+	@RequestMapping(path = "/loginForm",method = RequestMethod.POST)
+	public String getLoginData(@RequestParam("userName")String userName,
+			@RequestParam("userPassword")String userPassword,HttpSession session) {
+		
+		userDetails = service.getUserDetails(userName, userPassword);
+		System.out.println("User Profile Details "+userDetails);		
+		if(userDetails == null) {
+			Message message = new Message("Invalid Email and Password", "Error", "alert-danger");
+			session.setAttribute("message", message);
+			return "redirect:/login_Page";
+		}else {
+			session.setAttribute("userDetails", userDetails);
+			return "ProfileLogin";
+		}
+	}
+	
+	
 
 }

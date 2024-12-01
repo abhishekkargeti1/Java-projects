@@ -1,9 +1,8 @@
 package com.entities;
 
-import java.time.LocalDate;
-
 public class UserDetails {
 	
+	private int id;
 	private String userName;
 	private String userEmail;
 	private String userNumber;
@@ -11,6 +10,9 @@ public class UserDetails {
 	private String userProfilePic;
 	private String userDOB;
 	
+	
+	
+
 	public UserDetails() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -25,6 +27,17 @@ public class UserDetails {
 		this.userAddress = userAddress;
 		this.userProfilePic = userProfilePic;
 		this.userDOB = userDOB;
+	}
+	
+	
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getUserName() {
@@ -74,6 +87,7 @@ public class UserDetails {
 	public void setUserDOB(String userDOB) {
 		this.userDOB = userDOB;
 	}
+
 
 	@Override
 	public String toString() {

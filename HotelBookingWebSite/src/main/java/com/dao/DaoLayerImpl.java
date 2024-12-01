@@ -2,6 +2,7 @@ package com.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,27 +11,13 @@ import com.helperclasses.DBConnection;
 
 public class DaoLayerImpl implements Daolayer {
 
+	private Connection con = DBConnection.getConnection();
 	@Autowired
-	private DBConnection dbConnection;
-	
-	public DaoLayerImpl(DBConnection dbConnection) {
-		super();
-		this.dbConnection = dbConnection;
-	}
-	
-	public DBConnection getCon() {
-		return  dbConnection;
-	}
-	
-	public void setCon(DBConnection dbConnection) {
-		this.dbConnection = dbConnection;
-	}
-
-	
+	private UserDetails details;
+		
 	@Override
 	public boolean insertData(UserDetails details) {
 		System.out.println("Details "+details);
-		Connection con=dbConnection.getConnection();
 		try {
 			String query ="insert into userDetails (Name,Email,PhoneNumber,DOB,Address,ProfilePic) values(?,?,?,?,?,?)";
 			PreparedStatement pstmt = con.prepareStatement(query);
@@ -46,6 +33,37 @@ public class DaoLayerImpl implements Daolayer {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	@Override
+	public UserDetails getUserDetails(String email, String password) {
+		try {
+			
+			UserDetails details = null;
+			String query = "select * from userDetails where email=? and password=?";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt.setString(1, email);
+			pstmt.setString(2, password);
+			ResultSet rs =pstmt.executeQuery();
+			
+			while(rs.next()) {
+				details = new UserDetails(); 
+				details.setId(rs.getInt("Id"));
+				details.setUserName(rs.getString("Name"));
+				details.setUserEmail(rs.getString("Email"));
+				details.setUserNumber(rs.getString("PhoneNumber"));
+				details.setUserDOB(rs.getString("DOB"));
+				details.setUserAddress(rs.getString("Address"));
+				details.setUserProfilePic(rs.getString("ProfilePic"));
+			
+			}
+			// System.out.println("Details of dao"+details);
+			return details;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return details;
 	}
 	
 }

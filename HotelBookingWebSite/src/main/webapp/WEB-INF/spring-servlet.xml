@@ -35,10 +35,8 @@
 
     <!-- Bean definitions -->
     <bean class="com.entities.UserDetails" id="user" />
-    <bean class="com.services.ServiceLayerImpl" id="service" />
-    <bean class="com.helperclasses.DBConnection" id="connection" />    
+    <bean class="com.services.ServiceLayerImpl" id="service" />  
     <bean class="com.dao.DaoLayerImpl" id="daoImpl"  />    
     
-   
 
 </beans>

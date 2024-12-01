@@ -20,4 +20,11 @@ public class ServiceLayerImpl implements Servicelayer {
 		return false;
 	}
 
+
+	@Override
+	public UserDetails getUserDetails(String email, String password) {
+		
+		return dao.getUserDetails(email, password);
+	}
+
 }

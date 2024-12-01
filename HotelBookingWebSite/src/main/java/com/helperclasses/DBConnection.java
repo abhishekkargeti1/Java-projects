@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 
 public class DBConnection {
 	
-	private  Connection con;
+	private static Connection con;
 	
-	public  Connection getConnection() {
+	public static Connection getConnection() {
 		try {
 			if(con == null) {
 				Class.forName("com.mysql.cj.jdbc.Driver");

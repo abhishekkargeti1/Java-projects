@@ -62,7 +62,7 @@
     <div class="bg-light py-4">
         <div class="container">
             <h2 class="text-center">User Reviews</h2>
-            <p class="text-center">"HotelHopper made my travel planning a breeze!" - Sarah J.</p>
+            <p class="text-center">"Hotel Hopper made my travel planning a breeze!" - Sarah J.</p>
             <p class="text-center">"I found the perfect hotel for my family vacation!" - Mark T.</p>
         </div>
     </div>

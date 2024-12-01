@@ -25,7 +25,7 @@
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand active" href="home">Home</a>
+		<a class="navbar-brand active display-3 font-weight-bold" href="home">Hotel Hopper</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">

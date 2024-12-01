@@ -21,15 +21,17 @@ public class FileUpload {
 		this.file = file;
 	}
 		
-	public void saveFile(String path) {
+	public boolean saveFile(String path) {
 		try {
 			byte data[] = file.getBytes();
 			/* System.out.println(path); */
 			FileOutputStream fos = new FileOutputStream(path);
 			fos.write(data);
-			fos.close();	
+			fos.close();
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 		
