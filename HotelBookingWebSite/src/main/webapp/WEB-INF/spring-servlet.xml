@@ -38,5 +38,8 @@
     <bean class="com.services.ServiceLayerImpl" id="service" />  
     <bean class="com.dao.DaoLayerImpl" id="daoImpl"  />    
     
+    <mvc:annotation-driven />
+	<mvc:resources location="/WEB-INF/resources/"
+		mapping="/resources/**" />
 
 </beans>

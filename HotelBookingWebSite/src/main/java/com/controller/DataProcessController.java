@@ -2,11 +2,14 @@ package com.controller;
 
 import java.io.File;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,7 +60,7 @@ public class DataProcessController {
 
 		// System.out.println("Details " + userDetails);
 		if(Validation.emailValidation(userEmail)== true) {
-			System.out.println("In Side If ");
+			//System.out.println("In Side If ");
 			return "Email Already Exist  Please Go to Login Page ";
 		}else if (service.insertData(userDetails)) {
 			try {
@@ -66,8 +69,7 @@ public class DataProcessController {
 						+ File.separator + "images" + File.separator + file.getOriginalFilename();
 				FileUpload upload = new FileUpload(file);
 				if(upload.saveFile(path)) {
-					
-					MailerService.mailSender("Congulation Your login Id is "+userEmail+" And Password is d4ng3r", "Your Login Id and Password", userEmail, "abhishek.kargeti@gmail.com");
+					MailerService.mailSender("Congulation Your login Id is "+userEmail+" And Password is d4ng3r", "Your Login Id and Password", userEmail, "customerservices1808@gmail.com");
 					return "Done";
 				}
 				return "Image is not Uploaded Successfully";
@@ -86,17 +88,33 @@ public class DataProcessController {
 			@RequestParam("userPassword")String userPassword,HttpSession session) {
 		
 		userDetails = service.getUserDetails(userName, userPassword);
-		System.out.println("User Profile Details "+userDetails);		
+		//System.out.println("User Profile Details "+userDetails);		
 		if(userDetails == null) {
 			Message message = new Message("Invalid Email and Password", "Error", "alert-danger");
 			session.setAttribute("message", message);
 			return "redirect:/login_Page";
 		}else {
 			session.setAttribute("userDetails", userDetails);
-			return "ProfileLogin";
+			return "redirect:/ProfileLogin";
 		}
 	}
 	
-	
+	@RequestMapping("/logout")
+	public String getLogout(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("LogOut View");
+		HttpSession session = request.getSession();
+		if (session != null) {
+			session.removeAttribute("userDetails");
+			Message message = new Message("LogOut Successfully", "Success", "alert-success");
+			session.setAttribute("message", message);
+			return "redirect:/login_Page";
+		}
+		return "error_page";
+		
+	}
+	@ExceptionHandler({Exception.class})
+	public String ExceptionHndler() {
+		return "error_page";
+	}
 
 }
