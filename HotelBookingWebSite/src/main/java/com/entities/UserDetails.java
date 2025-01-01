@@ -9,7 +9,7 @@ public class UserDetails {
 	private String userAddress;
 	private String userProfilePic;
 	private String userDOB;
-	
+	private String userPassword;
 	
 	
 
@@ -27,6 +27,19 @@ public class UserDetails {
 		this.userAddress = userAddress;
 		this.userProfilePic = userProfilePic;
 		this.userDOB = userDOB;
+	}
+	
+	
+	public UserDetails(String userName, String userEmail, String userNumber, String userAddress, String userProfilePic,
+			String userDOB,String userPassword) {
+		super();
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userNumber = userNumber;
+		this.userAddress = userAddress;
+		this.userProfilePic = userProfilePic;
+		this.userDOB = userDOB;
+		this.userPassword=userPassword;
 	}
 	
 	
@@ -88,6 +101,15 @@ public class UserDetails {
 		this.userDOB = userDOB;
 	}
 
+	
+
+	public String getUserPassword() {
+		return userPassword;
+	}
+
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
 
 	@Override
 	public String toString() {

@@ -55,7 +55,7 @@ public class DaoLayerImpl implements Daolayer {
 				details.setUserDOB(rs.getString("DOB"));
 				details.setUserAddress(rs.getString("Address"));
 				details.setUserProfilePic(rs.getString("ProfilePic"));
-			
+				details.setUserPassword(rs.getString("Password"));
 			}
 			// System.out.println("Details of dao"+details);
 			return details;

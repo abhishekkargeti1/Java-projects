@@ -1,14 +1,14 @@
 <%@page import="com.entities.UserDetails"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page isELIgnored="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <%
 UserDetails details = (UserDetails) session.getAttribute("userDetails");
-System.out.println("User Details are " + details);
+//System.out.println("User Details are " + details);
 if (details == null) {
+	//System.out.println("In the if block");
 	response.sendRedirect("login_Page");
+	return;
 }
 %>
 <!DOCTYPE html>
@@ -24,6 +24,7 @@ if (details == null) {
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -82,7 +83,8 @@ if (details == null) {
 				</div>
 				<!-- Image Section -->
 				<div class="text-center p-3">
-					<img src="<%=request.getContextPath() + "/resources/images/" + details.getUserProfilePic()%>"
+					<img
+						src="<%=request.getContextPath() + "/resources/images/" + details.getUserProfilePic()%>"
 						alt="Profile Pic"
 						class="rounded-circle img-thumbnail mx-auto d-block"
 						style="width: 150px; height: 150px; object-fit: cover;">
@@ -129,26 +131,117 @@ if (details == null) {
 		</div>
 	</div>
 
+
+
+
 	<!-- Modal2 -->
-	<div class="modal fade" id="model2" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">Update Your
-						Details</h5>
-				</div>
-				<div class="modal-body">
-					
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
+	<form action="updatedDetails" method="POST" id="form"
+		enctype="multipart/form-data">
+
+		<div class="modal fade" id="model2" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Update
+							Your Details</h5>
+					</div>
+					<div class="modal-body">
+						<table class="table table-bordered table-hover text-center">
+							<thead class="thead-light">
+								<tr>
+									<th>Field</th>
+									<th>Details</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="font-weight-bold">Name</td>
+									<td><input type="text" class="form-control"
+										name="userName" value="<%=details.getUserName()%>"></td>
+								</tr>
+								<tr>
+									<td class="font-weight-bold">Email</td>
+									<td><%=details.getUserEmail()%></td>
+								</tr>
+								<tr>
+									<td class="font-weight-bold">Address</td>
+									<td><input type="text" class="form-control"
+										value="<%=details.getUserAddress()%>"></td>
+								</tr>
+								<tr>
+									<td class="font-weight-bold">Contact Number</td>
+									<td><input type="text" class="form-control"
+										value="<%=details.getUserNumber()%>"></td>
+								</tr>
+								<tr>
+									<td class="font-weight-bold">Profile Picture</td>
+									<td><input type="file" class="form-control"></td>
+								</tr>
+								<tr>
+									<td class="font-weight-bold">Change Password</td>
+									<td>
+										<div class="input-group">
+											<input type="password" class="form-control" id="password"
+												name="userPassword" value="<%=details.getUserPassword()%>" placeholder="Enter your password">
+											<div class="input-group-append">
+												<span class="input-group-text"> <i
+													class="fa fa-eye-slash" id="togglePassword"
+													style="cursor: pointer;"></i>
+												</span>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" data-toggle="modal"
+							data-target="#passwordModal">Save</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+
+		<!-- Password Modal  -->
+
+
+		<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Enter Your
+							OTP</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form action="verifyOtp" method="POST">
+						<div class="modal-body">
+							<input type="text" class="form-control" id="otp" name="otp"
+								placeholder="Enter your OTP" >
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</form>
+
+
+
+
+
 	<!-- Optional JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -162,4 +255,20 @@ if (details == null) {
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
 </body>
+
+<script>
+	const togglePassword = document.querySelector('#togglePassword');
+	const passwordField = document.querySelector('#password');
+
+	togglePassword.addEventListener('click', function() {
+		const type = passwordField.getAttribute('type') === 'password' ? 'text'
+				: 'password';
+		passwordField.setAttribute('type', type);
+		this.classList.toggle('fa-eye');
+		this.classList.toggle('fa-eye-slash');
+	});
+</script>
+
+
+
 </html>

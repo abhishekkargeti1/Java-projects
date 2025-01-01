@@ -112,6 +112,15 @@ public class DataProcessController {
 		return "error_page";
 		
 	}
+	@RequestMapping(path="/updatedDetails",method =RequestMethod.POST)
+	public String getUpdatedDetails(@RequestParam("userName")String name){
+		System.out.println("Hello World "+name);
+		return "";
+	}
+	
+	
+	
+	
 	@ExceptionHandler({Exception.class})
 	public String ExceptionHndler() {
 		return "error_page";
