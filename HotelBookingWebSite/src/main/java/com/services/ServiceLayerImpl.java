@@ -27,4 +27,10 @@ public class ServiceLayerImpl implements Servicelayer {
 		return dao.getUserDetails(email, password);
 	}
 
+
+	@Override
+	public boolean updatePassword(String email, String password) {
+		return dao.updatePassword(email, password);
+	}
+
 }

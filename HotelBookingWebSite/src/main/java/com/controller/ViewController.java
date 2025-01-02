@@ -37,7 +37,11 @@ public class ViewController {
 		return "SignUp";
 	}
 	
-	
+	@RequestMapping("/forgetPassword")
+	public String getNewPassword() {
+		System.out.println("Forget Password");
+		return"forget_Password";
+	}
 	
 	
 	

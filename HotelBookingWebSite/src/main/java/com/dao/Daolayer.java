@@ -8,4 +8,5 @@ public interface Daolayer {
 	
 	public UserDetails getUserDetails(String email,String password);
 
+	public boolean updatePassword(String email,String password);
 }	

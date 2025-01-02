@@ -97,11 +97,12 @@ body {
 					<small class="form-text text-danger" id="passwordError"></small>
 				</div>
 				<button type="submit" class="btn btn-primary btn-block">Login</button>
-			</form>
+			
 			<div class="text-center footer-link">
-				<a href="#">Forgot Password?</a> &nbsp; <a href="SignUp_Page">Sign
+				<a href="forgetPassword">Forgot Password?</a> &nbsp; <a href="SignUp_Page">Sign
 					Up Here</a>
 			</div>
+			</form>
 			<div class="text-center social-buttons">
 				<p>Or login with</p>
 				<a href="#" class="btn btn-outline-primary btn-sm"><span><i

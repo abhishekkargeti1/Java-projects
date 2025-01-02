@@ -102,6 +102,29 @@ public class DataProcessController {
 		}
 	}
 
+	@RequestMapping("/newPassword")
+	public String getNewPassword(@RequestParam("userEmail") String email, @RequestParam("newPassword") String Password,
+			@RequestParam("OTP") String OTP,HttpSession session) {
+
+		if (OTP.equals(otpValue)) {
+			userDetails.setUserEmail(email);
+			userDetails.setUserPassword(Password);
+			userDetails.setUserPassword(Password);
+			if (service.updatePassword(email, Password)) {
+				Message message = new Message("Password Updated Successfully", "Success", "alert-success");
+				session.setAttribute("message", message);
+				return "redirect:/login_Page";
+			} else {
+				Message message = new Message("Password Not Updated", "Error", "alert-danger");
+				session.setAttribute("message", message);
+				return "redirect:/forgetPassword";
+			}
+		}
+		Message message = new Message("Invalid OTP", "Error", "alert-danger");
+		session.setAttribute("message", message);
+		return "redirect:/forgetPassword";
+	}
+
 	@RequestMapping("/logout")
 	public String getLogout(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("LogOut View");

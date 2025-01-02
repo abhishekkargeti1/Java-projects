@@ -65,5 +65,21 @@ public class DaoLayerImpl implements Daolayer {
 		
 		return details;
 	}
+
+	@Override
+	public boolean updatePassword(String email, String password) {
+		
+		try {
+			String query ="update userDetails set Password = ? where Email=?";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt.setString(1, password);
+			pstmt.setString(2, email);
+			pstmt.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 	
 }
