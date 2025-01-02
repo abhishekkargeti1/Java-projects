@@ -20,6 +20,7 @@ import com.entities.UserDetails;
 import com.helperclasses.FileUpload;
 import com.helperclasses.MailerService;
 import com.helperclasses.Message;
+import com.helperclasses.OtpGenrator;
 import com.helperclasses.Validation;
 import com.services.ServiceLayerImpl;
 
@@ -29,6 +30,7 @@ public class DataProcessController {
 	private UserDetails userDetails;
 	@Autowired
 	private ServiceLayerImpl service;
+	private String otpValue;
 
 	@RequestMapping(path = "/adminlogin", method = RequestMethod.POST)
 	public String getAdminDashBoard(@RequestParam("username") String userName,
@@ -59,17 +61,18 @@ public class DataProcessController {
 		userDetails.setUserDOB(dateString);
 
 		// System.out.println("Details " + userDetails);
-		if(Validation.emailValidation(userEmail)== true) {
-			//System.out.println("In Side If ");
+		if (Validation.emailValidation(userEmail) == true) {
+			// System.out.println("In Side If ");
 			return "Email Already Exist  Please Go to Login Page ";
-		}else if (service.insertData(userDetails)) {
+		} else if (service.insertData(userDetails)) {
 			try {
 				Thread.sleep(7000);
 				String path = session.getServletContext().getRealPath("/") + "WEB-INF" + File.separator + "resources"
 						+ File.separator + "images" + File.separator + file.getOriginalFilename();
 				FileUpload upload = new FileUpload(file);
-				if(upload.saveFile(path)) {
-					MailerService.mailSender("Congulation Your login Id is "+userEmail+" And Password is d4ng3r", "Your Login Id and Password", userEmail, "customerservices1808@gmail.com");
+				if (upload.saveFile(path)) {
+					MailerService.mailSender("Congulation Your login Id is " + userEmail + " And Password is d4ng3r",
+							"Your Login Id and Password", userEmail, "customerservices1808@gmail.com");
 					return "Done";
 				}
 				return "Image is not Uploaded Successfully";
@@ -77,28 +80,28 @@ public class DataProcessController {
 				e.printStackTrace();
 				return "Error Saving File in Db";
 			}
-			
+
 		} else {
 			return "Database insert Failed";
 		}
 	}
-	
-	@RequestMapping(path = "/loginForm",method = RequestMethod.POST)
-	public String getLoginData(@RequestParam("userName")String userName,
-			@RequestParam("userPassword")String userPassword,HttpSession session) {
-		
+
+	@RequestMapping(path = "/loginForm", method = RequestMethod.POST)
+	public String getLoginData(@RequestParam("userName") String userName,
+			@RequestParam("userPassword") String userPassword, HttpSession session) {
+
 		userDetails = service.getUserDetails(userName, userPassword);
-		//System.out.println("User Profile Details "+userDetails);		
-		if(userDetails == null) {
+		// System.out.println("User Profile Details "+userDetails);
+		if (userDetails == null) {
 			Message message = new Message("Invalid Email and Password", "Error", "alert-danger");
 			session.setAttribute("message", message);
 			return "redirect:/login_Page";
-		}else {
+		} else {
 			session.setAttribute("userDetails", userDetails);
 			return "redirect:/ProfileLogin";
 		}
 	}
-	
+
 	@RequestMapping("/logout")
 	public String getLogout(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("LogOut View");
@@ -110,18 +113,42 @@ public class DataProcessController {
 			return "redirect:/login_Page";
 		}
 		return "error_page";
-		
+
 	}
-	@RequestMapping(path="/updatedDetails",method =RequestMethod.POST)
-	public String getUpdatedDetails(@RequestParam("userName")String name){
-		System.out.println("Hello World "+name);
-		return "";
+
+	@RequestMapping(value = "/OtpGenerator", method = RequestMethod.GET)
+	@ResponseBody
+	public String getOtp(@RequestParam("userEmail") String email) {
+		System.out.println("Hello World opt");
+		otpValue = OtpGenrator.Genrator();
+		String message = "Your OTP is " + otpValue;
+		MailerService.mailSender(message, "Verification Code", email, "customerservices1808@gmail.com");
+		return "Done";
 	}
-	
-	
-	
-	
-	@ExceptionHandler({Exception.class})
+
+	@RequestMapping(path = "/updatedDetails", method = RequestMethod.POST)
+	public String getUpdatedDetails(@RequestParam("userName") String userName,
+			@RequestParam("userAddress") String userAddress, @RequestParam("userNumber") String userNumber,
+			@RequestParam("userPassword") String userPassword, @RequestParam("userProfilePic") MultipartFile file,
+			@RequestParam("otp") String OTP, HttpSession session) {
+		if (OTP.equals(otpValue)) {
+			userDetails.setUserName(userName);
+			userDetails.setUserAddress(userAddress);
+			userDetails.setUserNumber(userNumber);
+			userDetails.setUserPassword(userPassword);
+			userDetails.setUserProfilePic(file.getOriginalFilename());
+			System.out.println("Hello World " + userDetails);
+			Message message = new Message("Profile Details Updated Successfully", "Success", "alert-success");
+			session.setAttribute("message", message);
+			return "redirect:/ProfileLogin";
+		} else {
+			Message message = new Message("Profile Details Not Updated Successfully", "Error", "alert-danger");
+			session.setAttribute("message", message);
+			return "redirect:/ProfileLogin";
+		}
+	}
+
+	@ExceptionHandler({ Exception.class })
 	public String ExceptionHndler() {
 		return "error_page";
 	}

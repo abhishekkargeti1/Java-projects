@@ -1,3 +1,4 @@
+<%@page import="com.helperclasses.Message"%>
 <%@page import="com.entities.UserDetails"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -60,7 +61,7 @@ if (details == null) {
 						<button class="dropdown-item" data-toggle="modal"
 							data-target="#modal1">Profile Info</button>
 						<button class="dropdown-item" data-toggle="modal"
-							data-target="#model2">Change Password</button>
+							data-target="#model2">Edit Profile Info</button>
 						<form action="logout" method="get" class="form-inline">
 							<button class="btn btn-danger btn-sm btn-block mt-2">Log
 								Out</button>
@@ -70,6 +71,18 @@ if (details == null) {
 		</div>
 	</nav>
 	<!-- Nav Ends -->
+	
+	<%
+			Message message = (Message) session.getAttribute("message");
+			if (message != null) {
+			%>
+			<div class="alert <%=message.getCssClass()%>" role="alert">
+				<%=message.getContent()%>
+			</div>
+			<%
+			 session.removeAttribute("message");
+			}
+			%>
 
 	<!-- Modal1   -->
 	<div class="modal fade" id="modal1" tabindex="-1" role="dialog"
@@ -136,7 +149,7 @@ if (details == null) {
 
 	<!-- Modal2 -->
 	<form action="updatedDetails" method="POST" id="form"
-		enctype="multipart/form-data">
+		enctype="multipart/form-data" onsubmit="return validateForm(event)">
 
 		<div class="modal fade" id="model2" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -162,21 +175,22 @@ if (details == null) {
 								</tr>
 								<tr>
 									<td class="font-weight-bold">Email</td>
-									<td><%=details.getUserEmail()%></td>
+									<td><input type="text" class="form-control"
+										value="<%=details.getUserEmail()%>" id="userEmail" readonly></td>
 								</tr>
 								<tr>
 									<td class="font-weight-bold">Address</td>
-									<td><input type="text" class="form-control"
+									<td><input type="text" class="form-control" name="userAddress"
 										value="<%=details.getUserAddress()%>"></td>
 								</tr>
 								<tr>
 									<td class="font-weight-bold">Contact Number</td>
-									<td><input type="text" class="form-control"
+									<td><input type="text" class="form-control" name="userNumber"
 										value="<%=details.getUserNumber()%>"></td>
 								</tr>
 								<tr>
 									<td class="font-weight-bold">Profile Picture</td>
-									<td><input type="file" class="form-control"></td>
+									<td><input type="file" class="form-control" name="userProfilePic"></td>
 								</tr>
 								<tr>
 									<td class="font-weight-bold">Change Password</td>
@@ -200,7 +214,7 @@ if (details == null) {
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Close</button>
 						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#passwordModal">Save</button>
+							data-target="#passwordModal" id=save_btn>Save</button>
 					</div>
 				</div>
 			</div>
@@ -221,17 +235,16 @@ if (details == null) {
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form action="verifyOtp" method="POST">
 						<div class="modal-body">
 							<input type="text" class="form-control" id="otp" name="otp"
 								placeholder="Enter your OTP" >
+							<small class="form-text text-danger" id="otpBoxError"></small>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-dismiss="modal">Close</button>
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</div>
-					</form>
 				</div>
 			</div>
 		</div>
@@ -267,8 +280,46 @@ if (details == null) {
 		this.classList.toggle('fa-eye');
 		this.classList.toggle('fa-eye-slash');
 	});
-</script>
 
+
+const btnClicked = document.getElementById("save_btn");
+btnClicked.addEventListener("click", () => {
+	const userEmail = document.getElementById("userEmail").value;
+    var url = "<%=request.getContextPath()%>/OtpGenerator"; 
+    url += "?userEmail=" + encodeURIComponent(userEmail);
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) { 
+            if (xhr.status === 200) { 
+                const response = xhr.responseText; 
+                console.log(response); 
+                if (response.trim() === "Done") { 
+                    alert("OTP Sent Successfully On Email ");
+                } else {
+                    alert("OTP Not Sent Successfully On Email");
+                }
+            } else {
+                console.error("Error: " + xhr.statusText);
+            }
+        }
+    };
+    xhr.send(); 
+});
+
+function validateForm(){
+	 let isValid = false;
+	const otpBox = document.getElementById("otp").value.trim();
+	if (otpBox === "") { 
+         document.getElementById("otpBoxError").innerText = "Please Enter OTP";
+         return isValid ;
+     }
+	isValid =true;
+	return isValid;
+	
+}
+
+</script>
 
 
 </html>

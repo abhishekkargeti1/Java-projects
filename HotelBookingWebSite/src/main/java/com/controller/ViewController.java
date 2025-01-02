@@ -36,6 +36,11 @@ public class ViewController {
 		System.out.println("SignUp_Page View");
 		return "SignUp";
 	}
+	
+	
+	
+	
+	
 	@RequestMapping("/ProfileLogin")
 	public String getProfile_Page() {
 		System.out.println("Profile_Page View");
