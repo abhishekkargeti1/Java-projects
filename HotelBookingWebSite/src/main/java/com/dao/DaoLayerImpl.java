@@ -14,19 +14,19 @@ public class DaoLayerImpl implements Daolayer {
 	private Connection con = DBConnection.getConnection();
 	@Autowired
 	private UserDetails details;
-		
+
 	@Override
 	public boolean insertData(UserDetails details) {
-		System.out.println("Details "+details);
+		System.out.println("Details " + details);
 		try {
-			String query ="insert into userDetails (Name,Email,PhoneNumber,DOB,Address,ProfilePic) values(?,?,?,?,?,?)";
+			String query = "insert into userDetails (Name,Email,PhoneNumber,DOB,Address,ProfilePic) values(?,?,?,?,?,?)";
 			PreparedStatement pstmt = con.prepareStatement(query);
-			pstmt.setString(1,details.getUserName());
-			pstmt.setString(2,details.getUserEmail());
-			pstmt.setString(3,details.getUserNumber());
-			pstmt.setString(4,details.getUserDOB());
-			pstmt.setString(5,details.getUserAddress());
-			pstmt.setString(6,details.getUserProfilePic());
+			pstmt.setString(1, details.getUserName());
+			pstmt.setString(2, details.getUserEmail());
+			pstmt.setString(3, details.getUserNumber());
+			pstmt.setString(4, details.getUserDOB());
+			pstmt.setString(5, details.getUserAddress());
+			pstmt.setString(6, details.getUserProfilePic());
 			pstmt.executeUpdate();
 			return true;
 		} catch (Exception e) {
@@ -38,16 +38,16 @@ public class DaoLayerImpl implements Daolayer {
 	@Override
 	public UserDetails getUserDetails(String email, String password) {
 		try {
-			
+
 			UserDetails details = null;
 			String query = "select * from userDetails where email=? and password=?";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			pstmt.setString(1, email);
 			pstmt.setString(2, password);
-			ResultSet rs =pstmt.executeQuery();
-			
-			while(rs.next()) {
-				details = new UserDetails(); 
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				details = new UserDetails();
 				details.setId(rs.getInt("Id"));
 				details.setUserName(rs.getString("Name"));
 				details.setUserEmail(rs.getString("Email"));
@@ -62,15 +62,15 @@ public class DaoLayerImpl implements Daolayer {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return details;
 	}
 
 	@Override
 	public boolean updatePassword(String email, String password) {
-		
+
 		try {
-			String query ="update userDetails set Password = ? where Email=?";
+			String query = "update userDetails set Password = ? where Email=?";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			pstmt.setString(1, password);
 			pstmt.setString(2, email);
@@ -81,5 +81,42 @@ public class DaoLayerImpl implements Daolayer {
 		}
 		return false;
 	}
-	
+
+	@Override
+	public boolean updateDetails(UserDetails details) {
+		try {
+			String query = "update userDetails set Password = ?, Name=? , Address=?, PhoneNumber=?,ProfilePic=?  where Email=?";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt.setString(1, details.getUserPassword());
+			pstmt.setString(2, details.getUserName());
+			pstmt.setString(3, details.getUserAddress());
+			pstmt.setString(4, details.getUserNumber());
+			pstmt.setString(5, details.getUserProfilePic());
+			pstmt.setString(6, details.getUserEmail());
+			pstmt.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateDetails1(UserDetails details) {
+		try {
+			String query ="update userDetails set Password = ?, Name=? , Address=?, PhoneNumber=? where Email=?";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt.setString(1, details.getUserPassword());
+			pstmt.setString(2, details.getUserName());
+			pstmt.setString(3, details.getUserAddress());
+			pstmt.setString(4, details.getUserNumber());
+			pstmt.setString(5, details.getUserEmail());
+			pstmt.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 }

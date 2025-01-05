@@ -176,7 +176,7 @@ if (details == null) {
 								<tr>
 									<td class="font-weight-bold">Email</td>
 									<td><input type="text" class="form-control"
-										value="<%=details.getUserEmail()%>" id="userEmail" readonly></td>
+										value="<%=details.getUserEmail()%>" id="userEmail" name="userEmail" readonly></td>
 								</tr>
 								<tr>
 									<td class="font-weight-bold">Address</td>

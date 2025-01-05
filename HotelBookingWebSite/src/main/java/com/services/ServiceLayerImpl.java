@@ -33,4 +33,16 @@ public class ServiceLayerImpl implements Servicelayer {
 		return dao.updatePassword(email, password);
 	}
 
+
+	@Override
+	public boolean updateDetails(UserDetails details) {
+		return dao.updateDetails(details);
+	}
+
+
+	@Override
+	public boolean updateDetails1(UserDetails details) {
+		return dao.updateDetails1(details);
+	}
+
 }

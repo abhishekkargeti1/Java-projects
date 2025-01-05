@@ -8,4 +8,8 @@ public interface Servicelayer {
 	public UserDetails getUserDetails(String email,String password);
 	
 	public boolean updatePassword(String email,String password);
+	
+	public boolean updateDetails(UserDetails details);
+	
+	public boolean updateDetails1(UserDetails details);
 }

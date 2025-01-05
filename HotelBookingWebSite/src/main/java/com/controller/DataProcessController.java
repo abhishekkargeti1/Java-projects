@@ -32,6 +32,8 @@ public class DataProcessController {
 	private ServiceLayerImpl service;
 	private String otpValue;
 
+	/* Admin Login Controller */
+	
 	@RequestMapping(path = "/adminlogin", method = RequestMethod.POST)
 	public String getAdminDashBoard(@RequestParam("username") String userName,
 			@RequestParam("password") String password, HttpSession session) {
@@ -46,6 +48,8 @@ public class DataProcessController {
 		}
 	}
 
+	/* SignUp Controller */
+	
 	@RequestMapping(path = "/registerForm", method = RequestMethod.POST)
 	@ResponseBody
 	public String getFormData(@RequestParam("userName") String userName, @RequestParam("userEmail") String userEmail,
@@ -86,6 +90,8 @@ public class DataProcessController {
 		}
 	}
 
+	/* User Login Controller */
+	
 	@RequestMapping(path = "/loginForm", method = RequestMethod.POST)
 	public String getLoginData(@RequestParam("userName") String userName,
 			@RequestParam("userPassword") String userPassword, HttpSession session) {
@@ -102,9 +108,11 @@ public class DataProcessController {
 		}
 	}
 
+	/* Forget Password Controller */
+	
 	@RequestMapping("/newPassword")
 	public String getNewPassword(@RequestParam("userEmail") String email, @RequestParam("newPassword") String Password,
-			@RequestParam("OTP") String OTP,HttpSession session) {
+			@RequestParam("OTP") String OTP, HttpSession session) {
 
 		if (OTP.equals(otpValue)) {
 			userDetails.setUserEmail(email);
@@ -125,6 +133,8 @@ public class DataProcessController {
 		return "redirect:/forgetPassword";
 	}
 
+	/* LogOut Controller */
+	
 	@RequestMapping("/logout")
 	public String getLogout(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("LogOut View");
@@ -139,6 +149,8 @@ public class DataProcessController {
 
 	}
 
+	/* Otp Generator Controller */
+	
 	@RequestMapping(value = "/OtpGenerator", method = RequestMethod.GET)
 	@ResponseBody
 	public String getOtp(@RequestParam("userEmail") String email) {
@@ -149,30 +161,82 @@ public class DataProcessController {
 		return "Done";
 	}
 
+	/* Edit Controller */
+	
 	@RequestMapping(path = "/updatedDetails", method = RequestMethod.POST)
 	public String getUpdatedDetails(@RequestParam("userName") String userName,
 			@RequestParam("userAddress") String userAddress, @RequestParam("userNumber") String userNumber,
 			@RequestParam("userPassword") String userPassword, @RequestParam("userProfilePic") MultipartFile file,
-			@RequestParam("otp") String OTP, HttpSession session) {
+			@RequestParam("otp") String OTP, @RequestParam("userEmail") String email, HttpSession session) {
 		if (OTP.equals(otpValue)) {
-			userDetails.setUserName(userName);
-			userDetails.setUserAddress(userAddress);
-			userDetails.setUserNumber(userNumber);
-			userDetails.setUserPassword(userPassword);
-			userDetails.setUserProfilePic(file.getOriginalFilename());
-			System.out.println("Hello World " + userDetails);
-			Message message = new Message("Profile Details Updated Successfully", "Success", "alert-success");
-			session.setAttribute("message", message);
-			return "redirect:/ProfileLogin";
+			if (file.getOriginalFilename() != "") {
+				System.out.println("Hello File");
+				userDetails.setUserName(userName);
+				userDetails.setUserAddress(userAddress);
+				userDetails.setUserNumber(userNumber);
+				userDetails.setUserPassword(userPassword);
+				userDetails.setUserProfilePic(file.getOriginalFilename());
+				userDetails.setUserEmail(email);
+				if (service.updateDetails(userDetails)) {
+					try {
+						String path = session.getServletContext().getRealPath("/") + "WEB-INF" + File.separator
+								+ "resources" + File.separator + "images" + File.separator + file.getOriginalFilename();
+						FileUpload upload = new FileUpload(file);
+						if (upload.saveFile(path)) {
+							Message message = new Message("Profile Details Updated Successfully", "Success",
+									"alert-success");
+							session.setAttribute("message", message);
+							return "redirect:/ProfileLogin";
+						} else {
+							System.out.println("Error in Saving File");
+							Message message = new Message("Profile Pic Not Updated ", "Error", "alert-danger");
+							session.setAttribute("message", message);
+							return "redirect:/ProfileLogin";
+						}
+					} catch (Exception e) {
+						System.out.println("Error in Saving File Catch");
+						e.printStackTrace();
+						Message message = new Message("Profile Details Not Updated ", "Error", "alert-danger");
+						session.setAttribute("message", message);
+						return "redirect:/ProfileLogin";
+
+					}
+
+				} else {
+					System.out.println("Error in Dao");
+					Message message = new Message("Profile Details Not Updated ", "Error", "alert-danger");
+					session.setAttribute("message", message);
+					return "redirect:/ProfileLogin";
+				}
+			} else {
+				userDetails.setUserName(userName);
+				userDetails.setUserAddress(userAddress);
+				userDetails.setUserNumber(userNumber);
+				userDetails.setUserPassword(userPassword);
+				userDetails.setUserEmail(email);
+				if (service.updateDetails1(userDetails)) {
+					Message message = new Message("Profile Details Updated Successfully", "Success", "alert-success");
+					session.setAttribute("message", message);
+					return "redirect:/ProfileLogin";
+				} else {
+					System.out.println("Error in Dao without Picture");
+					Message message = new Message("Profile Details Not Updated ", "Error", "alert-danger");
+					session.setAttribute("message", message);
+					return "redirect:/ProfileLogin";
+				}
+			}
 		} else {
-			Message message = new Message("Profile Details Not Updated Successfully", "Error", "alert-danger");
+			Message message = new Message("Please Enter Correct OTP ", "Error", "alert-danger");
 			session.setAttribute("message", message);
 			return "redirect:/ProfileLogin";
 		}
 	}
 
+	
+	
 	@ExceptionHandler({ Exception.class })
-	public String ExceptionHndler() {
+	public String ExceptionHandler(Exception e) {
+		e.printStackTrace();
 		return "error_page";
 	}
 
