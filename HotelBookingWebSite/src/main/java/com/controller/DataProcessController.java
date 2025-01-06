@@ -1,14 +1,15 @@
 package com.controller;
 
 import java.io.File;
+import java.util.concurrent.CompletableFuture;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +26,7 @@ import com.helperclasses.Validation;
 import com.services.ServiceLayerImpl;
 
 @Controller
+@EnableAsync
 public class DataProcessController {
 	@Autowired
 	private UserDetails userDetails;
@@ -70,7 +72,7 @@ public class DataProcessController {
 			return "Email Already Exist  Please Go to Login Page ";
 		} else if (service.insertData(userDetails)) {
 			try {
-				Thread.sleep(7000);
+				// Thread.sleep(7000);
 				String path = session.getServletContext().getRealPath("/") + "WEB-INF" + File.separator + "resources"
 						+ File.separator + "images" + File.separator + file.getOriginalFilename();
 				FileUpload upload = new FileUpload(file);
@@ -157,7 +159,8 @@ public class DataProcessController {
 		System.out.println("Hello World opt");
 		otpValue = OtpGenrator.Genrator();
 		String message = "Your OTP is " + otpValue;
-		MailerService.mailSender(message, "Verification Code", email, "customerservices1808@gmail.com");
+		  CompletableFuture.runAsync(() -> MailerService.mailSender(message, "Verification Code", email, "customerservices1808@gmail.com"));
+		//MailerService.mailSender(message, "Verification Code", email, "customerservices1808@gmail.com");
 		return "Done";
 	}
 

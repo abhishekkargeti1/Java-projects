@@ -71,18 +71,18 @@ if (details == null) {
 		</div>
 	</nav>
 	<!-- Nav Ends -->
-	
+
 	<%
-			Message message = (Message) session.getAttribute("message");
-			if (message != null) {
-			%>
-			<div class="alert <%=message.getCssClass()%>" role="alert">
-				<%=message.getContent()%>
-			</div>
-			<%
-			 session.removeAttribute("message");
-			}
-			%>
+	Message message = (Message) session.getAttribute("message");
+	if (message != null) {
+	%>
+	<div class="alert <%=message.getCssClass()%>" role="alert">
+		<%=message.getContent()%>
+	</div>
+	<%
+	session.removeAttribute("message");
+	}
+	%>
 
 	<!-- Modal1   -->
 	<div class="modal fade" id="modal1" tabindex="-1" role="dialog"
@@ -176,28 +176,31 @@ if (details == null) {
 								<tr>
 									<td class="font-weight-bold">Email</td>
 									<td><input type="text" class="form-control"
-										value="<%=details.getUserEmail()%>" id="userEmail" name="userEmail" readonly></td>
+										value="<%=details.getUserEmail()%>" id="userEmail"
+										name="userEmail" readonly></td>
 								</tr>
 								<tr>
 									<td class="font-weight-bold">Address</td>
-									<td><input type="text" class="form-control" name="userAddress"
-										value="<%=details.getUserAddress()%>"></td>
+									<td><input type="text" class="form-control"
+										name="userAddress" value="<%=details.getUserAddress()%>"></td>
 								</tr>
 								<tr>
 									<td class="font-weight-bold">Contact Number</td>
-									<td><input type="text" class="form-control" name="userNumber"
-										value="<%=details.getUserNumber()%>"></td>
+									<td><input type="text" class="form-control"
+										name="userNumber" value="<%=details.getUserNumber()%>"></td>
 								</tr>
 								<tr>
 									<td class="font-weight-bold">Profile Picture</td>
-									<td><input type="file" class="form-control" name="userProfilePic"></td>
+									<td><input type="file" class="form-control"
+										name="userProfilePic"></td>
 								</tr>
 								<tr>
 									<td class="font-weight-bold">Change Password</td>
 									<td>
 										<div class="input-group">
 											<input type="password" class="form-control" id="password"
-												name="userPassword" value="<%=details.getUserPassword()%>" placeholder="Enter your password">
+												name="userPassword" value="<%=details.getUserPassword()%>"
+												placeholder="Enter your password">
 											<div class="input-group-append">
 												<span class="input-group-text"> <i
 													class="fa fa-eye-slash" id="togglePassword"
@@ -235,16 +238,16 @@ if (details == null) {
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-						<div class="modal-body">
-							<input type="text" class="form-control" id="otp" name="otp"
-								placeholder="Enter your OTP" >
-							<small class="form-text text-danger" id="otpBoxError"></small>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Submit</button>
-						</div>
+					<div class="modal-body">
+						<input type="text" class="form-control" id="otp" name="otp"
+							placeholder="Enter your OTP"> <small
+							class="form-text text-danger" id="otpBoxError"></small>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -293,18 +296,21 @@ btnClicked.addEventListener("click", () => {
         if (xhr.readyState === 4) { 
             if (xhr.status === 200) { 
                 const response = xhr.responseText; 
-                console.log(response); 
+                console.log(response);
                 if (response.trim() === "Done") { 
-                    alert("OTP Sent Successfully On Email ");
+                        alert("OTP Sent Successfully On Email");
                 } else {
-                    alert("OTP Not Sent Successfully On Email");
+                        alert("OTP Not Sent Successfully On Email");
                 }
             } else {
                 console.error("Error: " + xhr.statusText);
             }
+            
         }
+        
     };
     xhr.send(); 
+    
 });
 
 function validateForm(){

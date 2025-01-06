@@ -168,13 +168,6 @@ input-group {
 		    this.classList.toggle("fa-eye-slash");
 		});
 
-		
-		
-		
-		
-		
-		
-		
 		const btnValue = document.getElementById("otp_btn");
 		btnValue.addEventListener("click", () => {
 			const userEmail = document.getElementById("userEmail").value;
@@ -188,7 +181,6 @@ input-group {
 		    	
 		    var url = "<%=request.getContextPath()%>/OtpGenerator"; 
 		    url += "?userEmail=" + encodeURIComponent(userEmail);
-		   
 		    	  const xhr = new XMLHttpRequest();
 				    xhr.open("GET", url);
 				    xhr.onreadystatechange = function () {

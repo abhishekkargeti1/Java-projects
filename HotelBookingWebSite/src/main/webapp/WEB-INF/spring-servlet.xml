@@ -6,21 +6,21 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:util="http://www.springframework.org/schema/util"
-       xsi:schemaLocation="
-           http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans.xsd
-           http://www.springframework.org/schema/context
-           http://www.springframework.org/schema/context/spring-context.xsd
-           http://www.springframework.org/schema/util
-           http://www.springframework.org/schema/util/spring-util.xsd
-           http://www.springframework.org/schema/tx
-           http://www.springframework.org/schema/tx/spring-tx.xsd
-           http://www.springframework.org/schema/mvc
-           http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <!-- Enable component scanning -->
+    <!-- Enable component scanning for beans -->
     <context:component-scan base-package="com" />
- <context:annotation-config/>
+    <context:annotation-config/>
+
     <!-- View Resolver configuration -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
         <property name="prefix" value="/WEB-INF/views/" />
@@ -28,18 +28,27 @@
     </bean>
 
     <!-- Multipart Resolver for file uploads -->
-    <bean id="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="5000000" />
     </bean>
 
-    <!-- Bean definitions -->
+    <!-- Bean definitions for user, service, and DAO layers -->
     <bean class="com.entities.UserDetails" id="user" />
-    <bean class="com.services.ServiceLayerImpl" id="service" />  
-    <bean class="com.dao.DaoLayerImpl" id="daoImpl"  />    
-    
+    <bean class="com.services.ServiceLayerImpl" id="service" />
+    <bean class="com.dao.DaoLayerImpl" id="daoImpl" />
+
+    <!-- Enable annotation-driven configuration for Spring MVC -->
     <mvc:annotation-driven />
-	<mvc:resources location="/WEB-INF/resources/"
-		mapping="/resources/**" />
+
+    <!-- Static resources (if needed) -->
+    <mvc:resources location="/WEB-INF/resources/" mapping="/resources/**" />
+
+    <!-- ThreadPoolTaskExecutor configuration for async tasks -->
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="10"/>
+        <property name="maxPoolSize" value="50"/>
+        <property name="queueCapacity" value="100"/>
+        <property name="threadNamePrefix" value="Async-"/>
+    </bean>
 
 </beans>
