@@ -30,6 +30,13 @@ public class ViewController {
 		System.out.println("Admin Login View");
 		return "admin_login";
 	}
+	
+	@RequestMapping("/adminlogin")
+	public String getAdmin_Page() {
+		System.out.println("Admin Login ");
+		return "admin_Profile";
+	}
+	
 
 	@RequestMapping("/SignUp_Page")
 	public String getSignUp_PageView() {

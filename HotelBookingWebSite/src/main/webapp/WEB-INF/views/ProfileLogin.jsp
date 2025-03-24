@@ -26,11 +26,572 @@ if (details == null) {
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
 
+<style>
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css?family=Anonymous+Pro');
+
+/* Cursor */
+.cursor {
+	position: relative;
+	width: 24em;
+	margin: 0 auto;
+	border-right: 2px solid rgba(255, 255, 255, 0.75);
+	font-size: 3pc;
+	text-align: center;
+	font-family: fantasy; /* Corrected font-family */
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+	transform: translateY(-50%);
+}
+
+/* Animation */
+.typewriter-animation {
+	animation: typewriter 10s steps(500) infinite normal both,
+		blinkingCursor 1000ms steps(500) infinite normal;
+}
+
+@
+keyframes typewriter { 0% {
+	width: 0;
+}
+
+50
+%
+{
+width
+:
+100%;
+}
+100
+%
+{
+width
+:
+0;
+}
+}
+
+/* Title CSS */
+.glass-effect {
+	background: linear-gradient(to right, rgba(85, 172, 238, 0.7),
+		rgba(0, 210, 255, 0.7)); /* Blue gradient */
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-size: 2rem; /* Adjust as needed */
+	font-weight: bold;
+	position: relative;
+}
+
+.glass-effect::before {
+	content: '';
+	position: absolute;
+	top: -5px;
+	left: -5px;
+	right: -5px;
+	bottom: -5px;
+	background: rgba(255, 255, 255, 0.15); /* Light overlay */
+	border-radius: 10px;
+	backdrop-filter: blur(10px); /* Frosted glass effect */
+	z-index: -1;
+	/* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+}
+
+/* Loader Css Start */
+*, *:before, *:after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+.wrapper {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -100px;
+	width: 200px;
+	height: 200px;
+	background-color: transparent;
+	border: none;
+}
+
+.wrapper .box-wrap {
+	width: 70%;
+	height: 70%;
+	margin: calc(( 100% - 70%)/2) calc(( 100% - 70%)/2);
+	position: relative;
+	transform: rotate(-45deg);
+}
+
+.wrapper .box-wrap .box {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: rgba(135, 0, 0, 0.6);
+	background: linear-gradient(to right, #141562, #486fbc, #eab5a1, #8dd6ff, #4973c9,
+		#d07ca7, #f4915e, #f5919e, #b46f89, #141562, #486fbc);
+	background-position: 0% 50%;
+	background-size: 1000% 1000%;
+	visibility: hidden;
+}
+
+.wrapper .box-wrap .box.one {
+	animation: moveGradient 15s infinite, oneMove 3.5s infinite;
+}
+
+.wrapper .box-wrap .box.two {
+	animation: moveGradient 15s infinite, twoMove 3.5s 0.15s infinite;
+}
+
+.wrapper .box-wrap .box.three {
+	animation: moveGradient 15s infinite, threeMove 3.5s 0.3s infinite;
+}
+
+.wrapper .box-wrap .box.four {
+	animation: moveGradient 15s infinite, fourMove 3.5s 0.575s infinite;
+}
+
+.wrapper .box-wrap .box.five {
+	animation: moveGradient 15s infinite, fiveMove 3.5s 0.725s infinite;
+}
+
+.wrapper .box-wrap .box.six {
+	animation: moveGradient 15s infinite, sixMove 3.5s 0.875s infinite;
+}
+
+@
+keyframes moveGradient {to { background-position:100%50%;
+	
+}
+
+}
+@
+keyframes oneMove { 0% {
+	visibility: visible;
+	clip-path: inset(0% 35% 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+14
+.2857 % {
+	clip-path: inset(0% 35% 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+28
+.5714 % {
+	clip-path: inset(35% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+42
+.8571 % {
+	clip-path: inset(35% 70% 35% 0 round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+57
+.1428 % {
+	clip-path: inset(35% 70% 35% 0 round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+71
+.4285 % {
+	clip-path: inset(0% 70% 70% 0 round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+85
+.7142 % {
+	clip-path: inset(0% 70% 70% 0 round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+100
+%
+{
+clip-path
+:
+inset(
+0%
+35%
+70%
+round
+5%
+);
+animation-timing-function
+:
+cubic-bezier(
+0.86
+,
+0
+,
+0.07
+,
+1
+);
+}
+}
+@
+keyframes twoMove { 0% {
+	visibility: visible;
+	clip-path: inset(0% 70% 70% 0 round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+14
+.2857 % {
+	clip-path: inset(0% 70% 70% 0 round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+28
+.5714 % {
+	clip-path: inset(0% 35% 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+42
+.8571 % {
+	clip-path: inset(0% 35% 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+57
+.1428 % {
+	clip-path: inset(35% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+71
+.4285 % {
+	clip-path: inset(35% 70% 35% 0 round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+85
+.7142 % {
+	clip-path: inset(35% 70% 35% 0 round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+100
+%
+{
+clip-path
+:
+inset(
+0%
+70%
+70%
+0
+round
+5%
+);
+animation-timing-function
+:
+cubic-bezier(
+0.86
+,
+0
+,
+0.07
+,
+1
+);
+}
+}
+@
+keyframes threeMove { 0% {
+	visibility: visible;
+	clip-path: inset(35% 70% 35% 0 round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+14
+.2857 % {
+	clip-path: inset(35% 70% 35% 0 round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+28
+.5714 % {
+	clip-path: inset(0% 70% 70% 0 round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+42
+.8571 % {
+	clip-path: inset(0% 70% 70% 0 round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+57
+.1428 % {
+	clip-path: inset(0% 35% 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+71
+.4285 % {
+	clip-path: inset(0% 35% 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+85
+.7142 % {
+	clip-path: inset(35% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+100
+%
+{
+clip-path
+:
+inset(
+35%
+70%
+35%
+0
+round
+5%
+);
+animation-timing-function
+:
+cubic-bezier(
+0.86
+,
+0
+,
+0.07
+,
+1
+);
+}
+}
+@
+keyframes fourMove { 0% {
+	visibility: visible;
+	clip-path: inset(35% 0% 35% 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+14
+.2857 % {
+	clip-path: inset(35% 0% 35% 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+28
+.5714 % {
+	clip-path: inset(35% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+42
+.8571 % {
+	clip-path: inset(70% 35% 0% 35% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+57
+.1428 % {
+	clip-path: inset(70% 35% 0% 35% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+71
+.4285 % {
+	clip-path: inset(70% 0 0 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+85
+.7142 % {
+	clip-path: inset(70% 0 0 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+100
+%
+{
+clip-path
+:
+inset(
+35%
+0%
+35%
+70%
+round
+5%
+);
+animation-timing-function
+:
+cubic-bezier(
+0.86
+,
+0
+,
+0.07
+,
+1
+);
+}
+}
+@
+keyframes fiveMove { 0% {
+	visibility: visible;
+	clip-path: inset(70% 0 0 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+14
+.2857 % {
+	clip-path: inset(70% 0 0 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+28
+.5714 % {
+	clip-path: inset(35% 0% 35% 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+42
+.8571 % {
+	clip-path: inset(35% 0% 35% 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+57
+.1428 % {
+	clip-path: inset(35% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+71
+.4285 % {
+	clip-path: inset(70% 35% 0% 35% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+85
+.7142 % {
+	clip-path: inset(70% 35% 0% 35% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+100
+%
+{
+clip-path
+:
+inset(
+70%
+0
+0
+70%
+round
+5%
+);
+animation-timing-function
+:
+cubic-bezier(
+0.86
+,
+0
+,
+0.07
+,
+1
+);
+}
+}
+@
+keyframes sixMove { 0% {
+	visibility: visible;
+	clip-path: inset(70% 35% 0% 35% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+14
+.2857 % {
+	clip-path: inset(70% 35% 0% 35% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+28
+.5714 % {
+	clip-path: inset(70% 0 0 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+42
+.8571 % {
+	clip-path: inset(70% 0 0 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+57
+.1428 % {
+	clip-path: inset(35% 0% 35% 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+71
+.4285 % {
+	clip-path: inset(35% 0% 35% 70% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+85
+.7142 % {
+	clip-path: inset(35% round 5%);
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+100
+%
+{
+clip-path
+:
+inset(
+70%
+35%
+0%
+35%
+round
+5%
+);
+animation-timing-function
+:
+cubic-bezier(
+0.86
+,
+0
+,
+0.07
+,
+1
+);
+}
+}
+/* Loader End */
+</style>
+
+
+
+
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand active display-3 font-weight-bold" href="home">Hotel
-			Hopper</a>
+		<a class="navbar-brand active display-3 font-weight-bold glass-effect"
+			href="home">Hotel Hopper</a>
+
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -223,7 +784,7 @@ if (details == null) {
 			</div>
 		</div>
 
-		<!-- Password Modal  -->
+		<!-- OTP  Modal  -->
 
 
 		<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog"
@@ -255,6 +816,29 @@ if (details == null) {
 	</form>
 
 
+	<!-- Loader Start -->
+
+	<div class="wrapper" id="Loader">
+		<div class="box-wrap">
+			<div class="box one"></div>
+			<div class="box two"></div>
+			<div class="box three"></div>
+			<div class="box four"></div>
+			<div class="box five"></div>
+			<div class="box six"></div>
+		</div>
+	</div>
+
+	<!-- Loader End -->
+
+
+
+
+
+
+
+	<p class="cursor typewriter-animation mt-5">Welcome To Hotel Hopper</p>
+
 
 
 
@@ -267,7 +851,7 @@ if (details == null) {
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
 	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+			src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
 </body>
@@ -324,6 +908,10 @@ function validateForm(){
 	return isValid;
 	
 }
+
+
+
+
 
 </script>
 

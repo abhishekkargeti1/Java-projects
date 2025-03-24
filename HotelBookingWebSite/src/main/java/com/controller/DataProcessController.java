@@ -39,10 +39,13 @@ public class DataProcessController {
 	@RequestMapping(path = "/adminlogin", method = RequestMethod.POST)
 	public String getAdminDashBoard(@RequestParam("username") String userName,
 			@RequestParam("password") String password, HttpSession session) {
-		System.out.println("Admin Login");
+		//System.out.println("Admin Login");
+ 		 boolean isLogedIn = false;
 		if (userName.equals("admin") && password.equals("admin")) {
-			System.out.println("Inside If");
-			return "admin_Profile";
+			//System.out.println("Inside If");
+			isLogedIn = true;
+			session.setAttribute("Admin", isLogedIn);
+			return "redirect:/adminlogin ";
 		} else {
 			Message message = new Message("Invalid Email and Password", "Error", "alert-danger");
 			session.setAttribute("message", message);
@@ -77,8 +80,8 @@ public class DataProcessController {
 						+ File.separator + "images" + File.separator + file.getOriginalFilename();
 				FileUpload upload = new FileUpload(file);
 				if (upload.saveFile(path)) {
-					MailerService.mailSender("Congulation Your login Id is " + userEmail + " And Password is d4ng3r",
-							"Your Login Id and Password", userEmail, "customerservices1808@gmail.com");
+					CompletableFuture.runAsync(()-> MailerService.mailSender("Congulation Your login Id is " + userEmail + " And Password is d4ng3r",
+							"Your Login Id and Password", userEmail, "customerservices1808@gmail.com"));
 					return "Done";
 				}
 				return "Image is not Uploaded Successfully";
@@ -146,6 +149,23 @@ public class DataProcessController {
 			Message message = new Message("LogOut Successfully", "Success", "alert-success");
 			session.setAttribute("message", message);
 			return "redirect:/login_Page";
+		}
+		return "error_page";
+
+	}
+	
+	
+	/* Admin LogOut Controller */
+	
+	@RequestMapping("/Adminlogout")
+	public String getAdminLogout(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("Admin LogOut View");
+		HttpSession session = request.getSession();
+		if (session != null) {
+			session.removeAttribute("Admin");
+			Message message = new Message("LogOut Successfully", "Success", "alert-success");
+			session.setAttribute("message", message);
+			return "redirect:/admin_login_Page";
 		}
 		return "error_page";
 

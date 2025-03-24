@@ -177,10 +177,20 @@ body {
         const dobInput = document.getElementById("dob").value.trim();
         const address = document.getElementById("address").value.trim();
         const dob = new Date(dobInput);
+        const fileInput = document.getElementById('photo');
+        const files = fileInput.files;
+        
         const today = new Date();
 
         let isValid = true;
 
+        if (files.length === 0) {
+        	document.getElementById("photoError").innerText = 'Please select a file.';
+        	isValid = false;
+        }
+
+        
+        
         if (!/^[A-Za-z\s]{3,30}$/.test(name)) {
             document.getElementById("nameError").innerText = "Name must be 3-30 characters and contain only letters and spaces.";
             isValid = false;
@@ -216,6 +226,7 @@ body {
         document.getElementById("phoneError").innerText = "";
         document.getElementById("dobError").innerText = ""; 
         document.getElementById("addressError").innerText = ""; 
+        document.getElementById("photoError").innerText = ""; 
     }
     
  // Add input event listeners for real-time validation feedback
@@ -236,6 +247,10 @@ body {
         validateForm();
     });
     document.getElementById("address").addEventListener("input", function() {
+        clearErrors();
+        validateForm();
+    });
+    document.getElementById("photo").addEventListener("input", function() {
         clearErrors();
         validateForm();
     });
